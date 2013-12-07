@@ -1,0 +1,18 @@
+https://www.google.pl/search?q=api&ie=utf-8&oe=utf-8&rls=org.mozilla:pl:official&client=firefox-a&gws_rd=cr&ei=hZifUomQOMPItQa_24D4Bw#q=api+for+programmers+top&rls=org.mozilla:pl%3Aofficial
+http://www.programmableweb.com/apis/directory/1?apicat=Music
+
+
+http://api.lololyrics.com/ xml rest
+http://www.lyricsnmusic.com/api jsonp json rest
+https://developer.musixmatch.com/documentation
+http://api.wikia.com/wiki/LyricWiki_API
+
+http://www.lyricsnmusic.com/api
+    Api key
+        9daed1547c54b5d6236a7a61635e80
+
+        http://api.lyricsnmusic.com/songs?api_key=9daed1547c54b5d6236a7a61635e80&q=coldplay%20clocks
+        http://api.lyricsnmusic.com/songs?api_key=9daed1547c54b5d6236a7a61635e80&track=clocks
+
+http://whateverorigin.org/
+http://anyorigin.com/

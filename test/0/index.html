@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test</title> 
+</head>
+<body>
+    <div id="container"></div>
+    <form action="">
+        <p><label for="sitename">podaj url: </label><input type="text" name="sitename"></p>
+        <p>
+           <input type="submit">
+        </p>
+    </form>
+    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="../../js/requestCrossDomain.js"></script>
+    <script>
+        var path = '';
+
+
+        $('form').on('submit', function() {
+            path = $('form [name="sitename"]').val();
+            
+            requestCrossDomain(path, function(results) {  
+               $('#container').html(results);  
+            });
+
+            return false;
+        });
+    </script>
+</body>
+</html>
