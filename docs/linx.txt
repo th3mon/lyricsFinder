@@ -7,6 +7,8 @@ WIKI
 https://www.mediawiki.org/wiki/API:Main_page
 https://www.mediawiki.org/wiki/API:Query#Getting_a_list_of_page_IDs
 http://www.mediawiki.org/wiki/Alternative_parsers
+https://github.com/tanin47/wiky.js
+https://github.com/joaomsa/txtwiki.js
 
 
 http://api.lololyrics.com/ xml rest
