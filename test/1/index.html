@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test</title> 
+</head>
+<body>
+    <div id="container"></div>
+    <form action="">
+        <p><label for="sitename">podaj url: </label><input type="text" name="sitename"></p>
+        <p>
+           <input type="submit">
+        </p>
+    </form>
+    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="../../js/requestCrossDomain.js"></script>
+    <script>
+        var path = '',
+            url = '';
+
+        url = 'http://api.lololyrics.com/0.5/getLyric?artist=Pattern+J&track=Chromozome';
+
+        $('form').on('submit', function() {
+            path = $('form [name="sitename"]').val();
+            
+            // requestCrossDomain(path, function(results) {  
+            //    $('#container').html(results);  
+            // });
+            // $.getJSON(url, function(results) {
+            //     console.log(results);
+            // });
+
+            // $.getJSON('http://whateverorigin.org/get?url=' + encodeURIComponent(url) + '&callback=?', function(data){
+            //     console.log(data);
+            // });
+
+            $.ajax({
+                url: url
+            }).always(function(data) {
+                var results = data.children[0].children,
+                    status;
+
+                console.dir(data.children[0].children);
+                status = data.children[0].children[0];
+                console.log(status);
+            });
+
+            return false;
+        });
+    </script>
+</body>
+</html>
