@@ -1,5 +1,12 @@
 https://www.google.pl/search?q=api&ie=utf-8&oe=utf-8&rls=org.mozilla:pl:official&client=firefox-a&gws_rd=cr&ei=hZifUomQOMPItQa_24D4Bw#q=api+for+programmers+top&rls=org.mozilla:pl%3Aofficial
 http://www.programmableweb.com/apis/directory/1?apicat=Music
+http://www.bestapis.com/?c=music
+
+
+WIKI
+https://www.mediawiki.org/wiki/API:Main_page
+https://www.mediawiki.org/wiki/API:Query#Getting_a_list_of_page_IDs
+http://www.mediawiki.org/wiki/Alternative_parsers
 
 
 http://api.lololyrics.com/ xml rest
