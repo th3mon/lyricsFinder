@@ -14,14 +14,24 @@ https://github.com/joaomsa/txtwiki.js
 http://api.lololyrics.com/ xml rest
 http://www.lyricsnmusic.com/api jsonp json rest
 https://developer.musixmatch.com/documentation
-http://api.wikia.com/wiki/LyricWiki_API
 
+http://api.wikia.com/wiki/LyricWiki_API
+http://lyrics.wikia.com/api.php?artist=Queen&song=Bohemian+Rhapsody&fmt=json
+
+1. lyrics.wikia.com zwraca kawałek tekstu.
+test/0/index.html -> tam dać idzie tego urla co zwrócił: http://lyrics.wikia.com/api.php?artist=Queen&song=Bohemian+Rhapsody&fmt=json i ukraść tekst co jest w div.lyricbox.
+2. Zanim tekst się wklei w apke to trzeba się pozbyć div.rtMatcher.
+
+Zaczyna mnie to wkurzać... Na lyricsnmusic jest baaardzo mało tekstów.
 http://www.lyricsnmusic.com/api
     Api key
         9daed1547c54b5d6236a7a61635e80
 
         http://api.lyricsnmusic.com/songs?api_key=9daed1547c54b5d6236a7a61635e80&q=coldplay%20clocks
         http://api.lyricsnmusic.com/songs?api_key=9daed1547c54b5d6236a7a61635e80&track=clocks
+
+http://www.chartlyrics.com/api.aspx
+http://api.chartlyrics.com/apiv1.asmx/SearchLyricDirect?artist=queen&song=Bohemian+Rhapsody
 
 http://whateverorigin.org/
 http://anyorigin.com/
