@@ -5,9 +5,20 @@
     <title>test</title> 
 </head>
 <body>
-    <div id="container"></div>
+    <div id="main">
+        <article id="result">
+            <header>
+                <h2 id="artist"></h2>
+                <h2 id="song"></h2>
+            </header>
+            <div id="content">
+                <p id="lyrics"></p>
+            </div>
+        </article>
+    </div>
     <form action="">
-        <p><label for="sitename">podaj url: </label><input type="text" name="sitename"></p>
+        <p><label for="artist">artist: </label><input type="text" name="artist"></p>
+        <p><label for="song">song: </label><input type="text" name="song"></p>
         <p>
            <input type="submit">
         </p>
@@ -15,35 +26,68 @@
     <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="../../js/requestCrossDomain.js"></script>
     <script>
-        var path = '',
-            url = '';
+        var artist = '',
+            song = '',
+            url = '',
+            errors = [],
 
-        url = 'http://api.lololyrics.com/0.5/getLyric?artist=Pattern+J&track=Chromozome';
+            parseResult = function(data) {
+                var
+                    artist = data.artist,
+                    song = data.song,
+                    lyrics = data.lyrics,
+                    url = data.url,
+
+                    $artist = $('#artist'),
+                    $song = $('#song'),
+                    $lyrics = $('#lyrics');
+
+                console.dir(data);
+
+                lyrics = lyrics.replace(/\n/g, '<br>');
+                console.log(lyrics);
+
+                $artist.text(artist);
+                $song.text(song);
+                $lyrics.html(lyrics);
+            },
+
+            parseToUrlSafeValues = function(str) {
+                str = encodeURIComponent(str);
+                str = str.replace('%2B', '+');
+
+                return str;
+            };
+
+        // url = 'http://lyrics.wikia.com/api.php?artist=Queen&song=Bohemian+Rhapsody&fmt=json';
+        // http://lyrics.wikia.com/api.php?artist=Queen&song=Bohemian+Rhapsody&fmt=realjson&callback=parseResult
+        url = 'http://lyrics.wikia.com/api.php?artist={{artist}}&song={{song}}&fmt=realjson&callback=parseResult';
 
         $('form').on('submit', function() {
-            path = $('form [name="sitename"]').val();
-            
-            // requestCrossDomain(path, function(results) {  
-            //    $('#container').html(results);  
-            // });
-            // $.getJSON(url, function(results) {
-            //     console.log(results);
-            // });
+            artist = $('form [name="artist"]').val();
+            artist = parseToUrlSafeValues(artist);
 
-            // $.getJSON('http://whateverorigin.org/get?url=' + encodeURIComponent(url) + '&callback=?', function(data){
-            //     console.log(data);
-            // });
+            song = $('form [name="song"]').val();
+            song = parseToUrlSafeValues(song);
 
-            $.ajax({
-                url: url
-            }).always(function(data) {
-                var results = data.children[0].children,
-                    status;
+            if (artist && song) {
+                url = url.replace('{{artist}}', artist).replace('{{song}}', song);
 
-                console.dir(data.children[0].children);
-                status = data.children[0].children[0];
-                console.log(status);
-            });
+                $.ajax({
+                    url: url,
+                    crossDomain: true,
+                    dataType: 'jsonp',
+                    jsonp: 'parseResult'
+                });
+            }
+
+            else {
+                errors.push('nie podano wszystkich danych');
+            }
+
+                // requestCrossDomain(url, function(results) {  
+                //    $('#container').html(results);  
+                // });
 
             return false;
         });
