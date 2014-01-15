@@ -4,7 +4,7 @@
     'use strict';
     $(function() {
         var
-            url = 'http://lyrics.wikia.com/api.php?artist={{artist}}&song={{song}}&fmt=realjson&callback=parseResult',
+            URL_TEMPLATE = 'http://lyrics.wikia.com/api.php?artist={{artist}}&song={{song}}&fmt=realjson&callback=LyricsFinderParseResult',
 
             artist = '',
             song = {
@@ -19,7 +19,7 @@
 
             $buttonMore = $('<button>', {
                 id: 'buttonMore',
-                text: 'więcej'
+                text: 'more'
             }),
 
             test = (/test/ig).test(location.hash),
@@ -40,7 +40,15 @@
 
                 $artist.text(artist);
                 $song.text(song.title);
-                $lyrics.html(song.lyrics).append($buttonMore);
+
+                if ((/not found/ig).test(song.lyrics)) {
+                    $lyrics.html(song.lyrics);
+                    errors.push('nie znaleziono tekstu');
+                }
+
+                else {
+                    $lyrics.html(song.lyrics).append($buttonMore);
+                }
             },
 
             parseToUrlSafeValues = function(str) {
@@ -57,45 +65,52 @@
                 value = parseToUrlSafeValues(value);
 
                 return value;
+            },
+
+            getData = function() {
+                var url = '';
+
+                artist = getInputData('artist');
+                song.title = getInputData('song');
+
+                if (artist && song.title) {
+                    url = URL_TEMPLATE.replace('{{artist}}', artist).replace('{{song}}', song.title);
+
+                    $.ajax({
+                        url: url,
+                        crossDomain: true,
+                        dataType: 'jsonp',
+                        jsonp: 'LyricsFinderParseResult'
+                    });
+                }
+
+                else {
+                    errors.push('nie podano wszystkich danych');
+                }
+                
+                return false;
+            },
+
+            getFullLyrics = function() {
+                requestCrossDomain(song.url, function(results) {
+                    results = results.replace(/link|style|script|meta/ig, 'p');
+                    $cache.html(results);
+                    $cache.remove('.rtMatcher');
+                    $('#lyrics').html($cache.find('.lyricbox').html());
+                });
+            },
+
+            doTest = function() {
+                if (test) {
+                    $('form [name="artist"]').val('queen');
+                    $('form [name="song"]').val('bohemian rhapsody');
+                }
             };
 
-        $form.on('submit', function() {
-            artist = getInputData('artist');
-            song.title = getInputData('song');
-
-            if (artist && song.title) {
-                url = url.replace('{{artist}}', artist).replace('{{song}}', song.title);
-
-                $.ajax({
-                    url: url,
-                    crossDomain: true,
-                    dataType: 'jsonp',
-                    jsonp: 'parseResult'
-                });
-            }
-
-            else {
-                errors.push('nie podano wszystkich danych');
-            }
-
-            return false;
-        });
-
-        $buttonMore.on('click', function() {
-            requestCrossDomain(song.url, function(results) {
-                results = results.replace(/link|style|script|meta/ig, 'p');
-                $cache.html(results);
-                $cache.remove('.rtMatcher');
-                $('#lyrics').html($cache.find('.lyricbox').html());
-            });
-        });
-
-        g.parseResult = parseResult;
-
-        if (test) {
-            $('form [name="artist"]').val('queen');
-            $('form [name="song"]').val('bohemian rhapsody');
-        }
+        g.LyricsFinderParseResult = parseResult;
+        $form.on('submit', getData);
+        $buttonMore.on('click', getFullLyrics);
+        doTest();
     });
 }(window, document, jQuery));
     
