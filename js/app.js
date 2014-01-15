@@ -95,7 +95,6 @@
                 requestCrossDomain(song.url, function(results) {
                     results = results.replace(/link|style|script|meta/ig, 'p');
                     $cache.html(results);
-                    $cache.remove('.rtMatcher');
                     $('#lyrics').html($cache.find('.lyricbox').html());
                 });
             },
