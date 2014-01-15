@@ -2,6 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <style>
+        #cache,
+        .rtMatcher {
+            display: none;
+        }
+    </style>
     <title>test</title> 
 </head>
 <body>
@@ -16,6 +22,7 @@
             </div>
         </article>
     </div>
+    <div id="cache"></div>
     <form action="">
         <p><label for="artist">artist: </label><input type="text" name="artist"></p>
         <p><label for="song">song: </label><input type="text" name="song"></p>
@@ -26,70 +33,94 @@
     <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="../../js/requestCrossDomain.js"></script>
     <script>
-        var artist = '',
-            song = '',
-            url = '',
-            errors = [],
+        $(function() {
+            var
+                artist = '',
+                song = {
+                    title: ''
+                },
+                url = '',
+                errors = [],
 
-            parseResult = function(data) {
-                var
-                    artist = data.artist,
-                    song = data.song,
-                    lyrics = data.lyrics,
-                    url = data.url,
+                $cache = $('#cache'),
 
-                    $artist = $('#artist'),
-                    $song = $('#song'),
-                    $lyrics = $('#lyrics');
+                $buttonMore = $('<button>', {
+                    id: 'buttonMore',
+                    text: 'więcej'
+                }),
 
-                console.dir(data);
+                debug = (/debug/ig).test(location.hash),
+                test = (/test/ig).test(location.hash),
 
-                lyrics = lyrics.replace(/\n/g, '<br>');
-                console.log(lyrics);
+                parseResult = function(data) {
+                    var
+                        artist = data.artist,
+                        url = data.url,
 
-                $artist.text(artist);
-                $song.text(song);
-                $lyrics.html(lyrics);
-            },
+                        $artist = $('#artist'),
+                        $song = $('#song'),
+                        $lyrics = $('#lyrics');
 
-            parseToUrlSafeValues = function(str) {
-                str = encodeURIComponent(str);
-                str = str.replace('%2B', '+');
+                    song.title = data.song;
+                    song.lyrics = data.lyrics;
+                    song.url = data.url;
 
-                return str;
-            };
+                    song.lyrics = song.lyrics.replace(/\n/g, '<br>');
 
-        // url = 'http://lyrics.wikia.com/api.php?artist=Queen&song=Bohemian+Rhapsody&fmt=json';
-        // http://lyrics.wikia.com/api.php?artist=Queen&song=Bohemian+Rhapsody&fmt=realjson&callback=parseResult
-        url = 'http://lyrics.wikia.com/api.php?artist={{artist}}&song={{song}}&fmt=realjson&callback=parseResult';
+                    $artist.text(artist);
+                    $song.text(song.title);
+                    $lyrics.html(song.lyrics).append($buttonMore);
+                },
 
-        $('form').on('submit', function() {
-            artist = $('form [name="artist"]').val();
-            artist = parseToUrlSafeValues(artist);
+                parseToUrlSafeValues = function(str) {
+                    str = encodeURIComponent(str);
+                    str = str.replace('%2B', '+');
 
-            song = $('form [name="song"]').val();
-            song = parseToUrlSafeValues(song);
+                    return str;
+                };
 
-            if (artist && song) {
-                url = url.replace('{{artist}}', artist).replace('{{song}}', song);
+            url = 'http://lyrics.wikia.com/api.php?artist={{artist}}&song={{song}}&fmt=realjson&callback=parseResult';
 
-                $.ajax({
-                    url: url,
-                    crossDomain: true,
-                    dataType: 'jsonp',
-                    jsonp: 'parseResult'
+            $('form').on('submit', function() {
+                artist = $('form [name="artist"]').val();
+                artist = parseToUrlSafeValues(artist);
+
+                song.title = $('form [name="song"]').val();
+                song.title = parseToUrlSafeValues(song.title);
+
+                if (artist && song.title) {
+                    url = url.replace('{{artist}}', artist).replace('{{song}}', song.title);
+
+                    $.ajax({
+                        url: url,
+                        crossDomain: true,
+                        dataType: 'jsonp',
+                        jsonp: 'parseResult'
+                    });
+                }
+
+                else {
+                    errors.push('nie podano wszystkich danych');
+                }
+
+                return false;
+            });
+
+            $buttonMore.on('click', function() {
+                requestCrossDomain(song.url, function(results) {
+                    results = results.replace(/link|style|script|meta/ig, 'p');
+                    $cache.html(results);
+                    $cache.remove('.rtMatcher');
+                    $('#lyrics').html($cache.find('.lyricbox').html());
                 });
+            });
+
+            window.parseResult = parseResult;
+
+            if (test) {
+                $('form [name="artist"]').val('queen');
+                $('form [name="song"]').val('bohemian rhapsody');
             }
-
-            else {
-                errors.push('nie podano wszystkich danych');
-            }
-
-                // requestCrossDomain(url, function(results) {  
-                //    $('#container').html(results);  
-                // });
-
-            return false;
         });
     </script>
 </body>
