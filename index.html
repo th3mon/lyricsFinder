@@ -2,24 +2,38 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>test</title>
+    <title>Lyrics Finder</title>
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
+    <div id="main">
+    </div>
     <section id="mainPage">
         <header>
             <h1>Lyrics Finder</h1>
         </header>
         <div class="body">
-            <div><pre id="container"></pre></div>
             <form action="">
-                <p><label for="songTitle">Tytuł: </label><input type="text" name="songTitle"></p>
+                <p><label for="artist">artist: </label><input type="text" name="artist"></p>
+                <p><label for="song">song: </label><input type="text" name="song"></p>
                 <p>
-                   <input type="submit" value="szukaj">
+                   <input type="submit">
                 </p>
             </form>
         </div>
     </section>
+    <section id="result">
+        <header>
+            <h2 id="artist"></h2>
+            <h2 id="song"></h2>
+        </header>
+        <div id="content">
+            <p id="lyrics"></p>
+        </div>
+    </section>
+    <div id="cache"></div>
     <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="js/requestCrossDomain.js"></script>
     <script src="js/utils.js"></script>
     <script src="js/app.js"></script>
 </body>
