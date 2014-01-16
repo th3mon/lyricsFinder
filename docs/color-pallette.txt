@@ -1,0 +1,5 @@
+#FFCE58 - żółty
+#E89B39 - jasny brąz
+#FF7427 - pomarańczowy
+#FF7427 - czerwony
+#FFECF0 - biały

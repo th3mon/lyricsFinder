@@ -1,4 +1,16 @@
-#cache,
+body {
+    background-color: #FFECF0;
+    padding-bottom: 60px;
+}
+
+.main-page {
+    background-color: #FFCE58;
+}
+
+.navbar {
+    margin-bottom: 0;
+}
+
 .rtMatcher {
     display: none;
 }

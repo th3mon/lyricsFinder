@@ -19,7 +19,8 @@
 
             $buttonMore = $('<button>', {
                 id: 'buttonMore',
-                text: 'more'
+                text: 'more',
+                'class': 'btn btn-primary btn-block btn-lg'
             }),
 
             test = (/test/ig).test(location.hash),
@@ -47,8 +48,15 @@
                 }
 
                 else {
-                    $lyrics.html(song.lyrics).append($buttonMore);
+                    $lyrics.html(song.lyrics).parent().after($buttonMore);
                 }
+
+                $('#resultPage')
+                    .css('opacity', 0)
+                    .removeClass('hidden')
+                    .animate({
+                        opacity: 1
+                    });
             },
 
             parseToUrlSafeValues = function(str) {
@@ -87,6 +95,8 @@
                 else {
                     errors.push('nie podano wszystkich danych');
                 }
+
+                $buttonMore.removeClass('hidden');
                 
                 return false;
             },
@@ -95,7 +105,19 @@
                 requestCrossDomain(song.url, function(results) {
                     results = results.replace(/link|style|script|meta/ig, 'p');
                     $cache.html(results);
-                    $('#lyrics').html($cache.find('.lyricbox').html());
+
+                    $('#lyrics')
+                        .animate({
+                            opacity: 0
+                        }, function() {
+                            $(this)
+                                .html($cache.find('.lyricbox').html())
+                                .animate({
+                                    opacity: 1
+                                });
+                        });
+
+                    $buttonMore.addClass('hidden');
                 });
             },
 
