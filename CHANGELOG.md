@@ -1,0 +1,16 @@
+## Change Log
+
+### upcoming (2014/02/24 09:49 +00:00)
+- [494057e](https://github.com/th3mon/lyricsFinder/commit/494057e211a423693b2bbc98fb6ea5389d63d333) First commit (@th3mon)
+- [af2c89a](https://github.com/th3mon/lyricsFinder/commit/af2c89ae390bed6d3ff117d847f29b65bc48ff50) ADD: parsery wikitext (@th3mon)
+- [83a8d14](https://github.com/th3mon/lyricsFinder/commit/83a8d14b31b13d60a297c2ac6e0873e3609fe185) ADD: test, LoloLyrics, działające api! (@th3mon)
+- [d442e64](https://github.com/th3mon/lyricsFinder/commit/d442e64ab8484e3914a3347596a3897dd31a3b73) CHANGE: linki do paresrów wikitext (@th3mon)
+- [ca9b749](https://github.com/th3mon/lyricsFinder/commit/ca9b749c109b182449acfafb7cae68315f89ad13) Change: notki w linkach (@th3mon)
+- [4aa016e](https://github.com/th3mon/lyricsFinder/commit/4aa016e01a16b03d29d9e9c37e3d16a6f8d13603) CHANGE: Pobieranie kawałka tekstu z wikia.com (@th3mon)
+- [b1f62d9](https://github.com/th3mon/lyricsFinder/commit/b1f62d94b17542dc5b0bef5ee251f9430af6f27f) CHANGE: Mechanizm podstawowy działa :-) (@th3mon)
+- [9c4aae5](https://github.com/th3mon/lyricsFinder/commit/9c4aae5ef97f4eb3a576e0eba89f7082a0bf2c23) CHANGE/ADD: Przeniesienie kodu z test/1 (@th3mon)
+- [d47a6d8](https://github.com/th3mon/lyricsFinder/commit/d47a6d84db42a9795177d7ce045141fc3c0e8391) REFACTORING (@th3mon)
+- [42cc5e7](https://github.com/th3mon/lyricsFinder/commit/42cc5e7abec332afa11561bf4fc5edd26737f92b) CHANGE: usunięcie zbędnej linijki kodu (@th3mon)
+- [1bd178e](https://github.com/th3mon/lyricsFinder/commit/1bd178edb955eda826bd44f50c4e8401ff1fe332) ADD: jquery jako plik lokalny (@th3mon)
+- [3f866f5](https://github.com/th3mon/lyricsFinder/commit/3f866f57a023d9b4fbd44f050b99244ea7a4e32c) ADD: bootstrap 3.0.3 (@th3mon)
+- [b25894e](https://github.com/th3mon/lyricsFinder/commit/b25894ee3789cdbf9cfd1dc65c28046d19641789) CHANGE: UI & przemieszczenie plików (@th3mon)
