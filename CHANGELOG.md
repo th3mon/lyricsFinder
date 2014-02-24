@@ -1,6 +1,6 @@
 ## Change Log
 
-### upcoming (2014/02/24 09:49 +00:00)
+### upcoming (2014/02/24 09:52 +00:00)
 - [494057e](https://github.com/th3mon/lyricsFinder/commit/494057e211a423693b2bbc98fb6ea5389d63d333) First commit (@th3mon)
 - [af2c89a](https://github.com/th3mon/lyricsFinder/commit/af2c89ae390bed6d3ff117d847f29b65bc48ff50) ADD: parsery wikitext (@th3mon)
 - [83a8d14](https://github.com/th3mon/lyricsFinder/commit/83a8d14b31b13d60a297c2ac6e0873e3609fe185) ADD: test, LoloLyrics, działające api! (@th3mon)
@@ -14,3 +14,4 @@
 - [1bd178e](https://github.com/th3mon/lyricsFinder/commit/1bd178edb955eda826bd44f50c4e8401ff1fe332) ADD: jquery jako plik lokalny (@th3mon)
 - [3f866f5](https://github.com/th3mon/lyricsFinder/commit/3f866f57a023d9b4fbd44f050b99244ea7a4e32c) ADD: bootstrap 3.0.3 (@th3mon)
 - [b25894e](https://github.com/th3mon/lyricsFinder/commit/b25894ee3789cdbf9cfd1dc65c28046d19641789) CHANGE: UI & przemieszczenie plików (@th3mon)
+- [80d4b4a](https://github.com/th3mon/lyricsFinder/commit/80d4b4a888cef0997c3e42c6fe4c5ef5903d5955) ADD: Change log & notki (@th3mon)
