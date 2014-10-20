@@ -11,17 +11,25 @@
                 title: ''
             },
 
+            pages = new PageManager({
+                main: $('#main'),
+                result: $('#result'),
+                about: $('#about')
+            }),
+
             errors = [],
+            cache = {},
 
+            $g = $(g),
             $cache = $('#cache'),
-
             $form = $('form'),
-
             $buttonMore = $('<button>', {
                 id: 'buttonMore',
                 text: 'more',
                 'class': 'btn btn-primary btn-block btn-lg'
             }),
+            $buttonAbout = $('#buttonAbout'),
+            $buttonBack = $('#buttonBack'),
 
             test = (/test/ig).test(location.hash),
 
@@ -51,7 +59,7 @@
                     $lyrics.html(song.lyrics).parent().after($buttonMore);
                 }
 
-                $('#resultPage')
+                $('#resultPage, #result')
                     .css('opacity', 0)
                     .removeClass('hidden')
                     .animate({
@@ -97,7 +105,7 @@
                 }
 
                 $buttonMore.removeClass('hidden');
-                
+
                 return false;
             },
 
@@ -126,12 +134,39 @@
                     $('form [name="artist"]').val('queen');
                     $('form [name="song"]').val('bohemian rhapsody');
                 }
+            },
+
+            showAboutPage = function() {
+                pages.show('about');
+                $g.trigger('page.about.visible');
+            },
+
+            showButtonBack = function() {
+                $buttonBack
+                    .show()
+                    .css({display: 'block'})
+                    .removeClass('hidden');
+            },
+
+            hideButtonBack = function() {
+                $buttonBack.hide().addClass('hidden');
+            },
+
+            goBack = function() {
+                // pages.show(pages.previous);
+                g.history.back();
             };
 
         g.LyricsFinderParseResult = parseResult;
+        pages.previous = 'main';
+        pages.about.css({opacity: 0});
+        $g.on('page.about.visible', showButtonBack);
+        $g.on('page.about.hidden', hideButtonBack);
         $form.on('submit', getData);
         $buttonMore.on('click', getFullLyrics);
+        $buttonAbout.on('click', showAboutPage);
+        $buttonBack.on('click', goBack);
         doTest();
     });
 }(window, document, jQuery));
-    
+
