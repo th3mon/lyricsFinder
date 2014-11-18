@@ -23,6 +23,9 @@
       }),
       $buttonAbout = $('#buttonAbout'),
       $buttonBack = $('#buttonBack'),
+      $aboutPage = $('#about'),
+      $resultPage = $('#result'),
+      $pages = $('.page'),
 
       test = (/test/ig).test(location.hash);
 
@@ -51,6 +54,8 @@
       else {
         $lyrics.html(song.lyrics).parent().after($buttonMore);
       }
+
+      $lyrics.data('loaded', true);
 
       $('#resultPage, #result')
         .css('opacity', 0)
@@ -129,14 +134,18 @@
     }
 
     function showAboutPage () {
-      $g.trigger('page.about.visible');
+      var previousPage = $pages.filter(':visible').attr('id');
+      $pages.addClass('hidden');
+      $aboutPage.removeClass('hidden');
+      $g.trigger('page.about.visible', previousPage);
     }
 
-    function showButtonBack () {
+    function showButtonBack (e, previousPage) {
       $buttonBack
         .show()
         .css({display: 'block'})
-        .removeClass('hidden');
+        .removeClass('hidden')
+        .data('previous-page' ,previousPage);
     }
 
     function hideButtonBack () {
@@ -144,7 +153,13 @@
     }
 
     function goBack () {
-      g.history.back();
+      $pages.addClass('hidden');
+      $buttonBack.addClass('hidden');
+      $('#' + $buttonBack.data('previous-page')).removeClass('hidden');
+      location.hash = $buttonBack.data('previous-page');
+      if ($('#lyrics').data('loaded')) {
+        $resultPage.removeClass('hidden');
+      }
     }
 
     g.LyricsFinderParseResult = parseResult;
