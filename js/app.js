@@ -157,6 +157,7 @@
       $buttonBack.addClass('hidden');
       $('#' + $buttonBack.data('previous-page')).removeClass('hidden');
       location.hash = $buttonBack.data('previous-page');
+
       if ($('#lyrics').data('loaded')) {
         $resultPage.removeClass('hidden');
       }

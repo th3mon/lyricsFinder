@@ -1,16 +1,26 @@
 body {
-    background-color: #FFECF0;
-    padding-bottom: 60px;
+  background-color: #FFECF0;
+  padding-bottom: 60px;
 }
-
-.main-page {
-    background-color: #FFCE58;
+.main-page,
+.header,
+.about-page {
+  background-color: #FFCE58;
 }
-
-.navbar {
-    margin-bottom: 0;
+.header {
+  position: relative;
 }
-
-.rtMatcher {
-    display: none;
+.header a {
+  color: #000;
+}
+.header .back-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50px;
+  bottom: 0;
+  cursor: pointer;
+}
+.header .glyphicon {
+  top: 22px;
 }
