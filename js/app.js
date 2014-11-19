@@ -46,23 +46,24 @@
       $artist.text(artist);
       $song.text(song.title);
 
+      $lyrics.empty();
       if ((/not found/ig).test(song.lyrics)) {
         $lyrics.html(song.lyrics);
         errors.push('nie znaleziono tekstu');
+
+        $('#resultPage, #result')
+          .css('opacity', 0)
+          .removeClass('hidden')
+          .animate({
+            opacity: 1
+          });
       }
 
       else {
-        $lyrics.html(song.lyrics).parent().after($buttonMore);
+        getFullLyrics();
       }
 
       $lyrics.data('loaded', true);
-
-      $('#resultPage, #result')
-        .css('opacity', 0)
-        .removeClass('hidden')
-        .animate({
-          opacity: 1
-        });
     }
 
     function parseToUrlSafeValues (str) {
@@ -110,6 +111,8 @@
       requestCrossDomain(song.url, function(results) {
         results = results.replace(/link|style|script|meta/ig, 'p');
         $cache.html(results);
+
+        $('#resultPage, #result, #lyrics').removeClass('hidden');
 
         $('#lyrics')
           .animate({
